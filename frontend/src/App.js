@@ -7,11 +7,11 @@ function App() {
   return (
     <div>
       <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        {/* <Route path="/shop" component={ScheduleMail} />
+      {/* <Switch>/ */}
+      {/* <Route exact path="/" component={HomePage} /> */}
+      {/* <Route path="/shop" component={ScheduleMail} />
         <Route exact path="/checkout" component={History} /> */}
-      </Switch>
+      {/* </Switch> */}
     </div>
   );
 }
