@@ -1,12 +1,14 @@
 import React from 'react';
 import Header from './components/header/header.component';
+import Sidebar from './components/sidebar/sidebar';
 import HomePage from './Pages/homepage/homepage';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      <Header />
+      
+      <Route exact path="/" component={Sidebar} />
       {/* <Switch>/ */}
       {/* <Route exact path="/" component={HomePage} /> */}
       {/* <Route path="/shop" component={ScheduleMail} />
