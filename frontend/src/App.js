@@ -9,13 +9,8 @@ import NewCompose from './components/compose/NewCompose'
 function App() {
   return (
     <div>
-<<<<<<< HEAD
       <Route exact path="/" component={Drawer} />
-=======
-      
-      <Route exact path="/" component={Sidebar} />
-      
->>>>>>> a0f04679694433a40f5cb32420e008c6eab179f6
+
       {/* <Switch>/ */}
       {/* <Route exact path="/" component={HomePage} /> */}
       {/* <Route path="/shop" component={ScheduleMail} />
