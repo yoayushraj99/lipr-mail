@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/header/header.component';
-import Sidebar from './components/sidebar/sidebar';
+import Drawer from './components/drawer/drawer.component';
 import HomePage from './Pages/homepage/homepage';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Compose from './components/compose/Compose';
@@ -9,9 +9,8 @@ import NewCompose from './components/compose/NewCompose'
 function App() {
   return (
     <div>
-      
-      <Route exact path="/" component={Sidebar} />
-      
+      <Route exact path="/" component={Drawer} />
+
       {/* <Switch>/ */}
       {/* <Route exact path="/" component={HomePage} /> */}
       {/* <Route path="/shop" component={ScheduleMail} />
