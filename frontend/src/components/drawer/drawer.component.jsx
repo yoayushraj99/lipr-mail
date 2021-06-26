@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Mail from '../Mails/mail.component';
 import Header from '../header/header.component';
 
@@ -22,6 +22,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 
 const drawerWidth = 240;
 
@@ -50,7 +52,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ClippedDrawer() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const name = 'Ayush';
+  const greeting = `Hello ${name}`;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -66,7 +70,7 @@ export default function ClippedDrawer() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Clipped drawer
+            LIPR MAIL
           </Typography>
         </Toolbar>
       </AppBar>
@@ -80,16 +84,38 @@ export default function ClippedDrawer() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Name', 'Inbox', 'Starred', 'Send email', 'Drafts', 'LogOut'].map(
-              (text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              )
-            )}
+            <ListItem button key={greeting}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary={greeting} />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button key="Compose">
+              <ListItemIcon>
+                <AddCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Compose" />
+            </ListItem>
+            <ListItem button key="Schedule Mail">
+              <ListItemIcon>
+                <ScheduleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Schedule Mail" />
+            </ListItem>
+            <ListItem button key="SENT">
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="SENT" />
+            </ListItem>
+            <ListItem button key="LOGOUT">
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="LOGOUT" />
+            </ListItem>
           </List>
           <Divider />
         </div>
