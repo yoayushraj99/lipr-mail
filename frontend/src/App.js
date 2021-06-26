@@ -3,12 +3,14 @@ import Header from './components/header/header.component';
 import Sidebar from './components/sidebar/sidebar';
 import HomePage from './Pages/homepage/homepage';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import Compose from './components/compose/Compose';
 
 function App() {
   return (
     <div>
       
       <Route exact path="/" component={Sidebar} />
+      <Route exact path="/c" component={Compose} />
       {/* <Switch>/ */}
       {/* <Route exact path="/" component={HomePage} /> */}
       {/* <Route path="/shop" component={ScheduleMail} />
