@@ -63,12 +63,12 @@
 // module.exports = router;
 
 // routes/api/mail.js
-var cron = require('node-cron');
 const express = require('express');
 const router = express.Router();
 
 // Load mails model
 const Mail = require('../../models/Mail');
+const SendMail = require('../../controller/sendMail');
 
 const cronStr = {
   0: '*/30 * * * * *',
@@ -76,8 +76,6 @@ const cronStr = {
   2: '* * * * 1-12 *',
   3: '* * * * 1-12 *',
 };
-
-export let data;
 
 // @route GET api/mails/test
 // @description tests mailss route
@@ -98,8 +96,10 @@ router.get('/', (req, res) => {
 // @access Public
 router.get('/:id', (req, res) => {
   Mail.findById(req.params.id)
-    .then((mails) => res.json(mails))
-    .then((mail) => (data = mail))
+    .then((mails) => {
+      SendMail(mails);
+      return res.json(mails);
+    })
     .catch((err) => res.status(404).json({ nomailsfound: 'No mails found' }));
 });
 
@@ -134,6 +134,4 @@ router.delete('/:id', (req, res) => {
     .catch((err) => res.status(404).json({ error: 'No such a mails' }));
 });
 
-module.exports = {
-  router,
-};
+module.exports = router;
