@@ -14,8 +14,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ActionsInAccordionSummary() {
+export default function ActionsInAccordionSummary(props) {
   const classes = useStyles();
+
+  const { to, from, cc, subject, body, scheduleDate } = props;
+  const lable = `I acknowledge that I should stop the click event propagation ${scheduleDate}`;
 
   return (
     <div className={classes.root}>
@@ -31,13 +34,17 @@ export default function ActionsInAccordionSummary() {
             onClick={(event) => event.stopPropagation()}
             onFocus={(event) => event.stopPropagation()}
             control={<Checkbox />}
-            label="I acknowledge that I should stop the click event propagation"
+            label={lable}
           />
         </AccordionSummary>
         <AccordionDetails>
           <Typography color="textSecondary">
-            The click event of the nested action will propagate up and expand
-            the accordion unless you explicitly stop it.
+            <Typography variant="caption" display="block" gutterBottom>
+              To: {to}, From: {from}, CC: {cc}, Subject: {subject}
+            </Typography>
+            <Typography variant="subtitle2" gutterBottom>
+              Body: {body}
+            </Typography>
           </Typography>
         </AccordionDetails>
       </Accordion>

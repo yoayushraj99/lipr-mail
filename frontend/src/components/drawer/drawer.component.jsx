@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import Mail from '../Mails/mail.component';
-import Header from '../header/header.component';
-import Compose from '../compose/Compose';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -15,16 +13,16 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Button,
-  Menu,
-  MenuItem,
 } from '@material-ui/core/';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ScheduleIcon from '@material-ui/icons/Schedule';
+
+import { Link } from 'react-router-dom';
+
+import { auth } from '../../firebase/firebase.utils';
 
 const drawerWidth = 240;
 
@@ -51,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ClippedDrawer() {
+export default function ClippedDrawer({ currentUser }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [composeComponent, setComposeComponent] = useState(false);
@@ -60,14 +58,6 @@ export default function ClippedDrawer() {
 
   const name = 'Ayush';
   const greeting = `Hello ${name}`;
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <div className={classes.root}>
@@ -94,6 +84,15 @@ export default function ClippedDrawer() {
               key={greeting}
               onClick={(event) => console.log(event.target)}
             >
+              {currentUser ? (
+                <div className="option" onClick={() => auth.signOut()}>
+                  SIGN OUT
+                </div>
+              ) : (
+                <Link className="option" to="/signin">
+                  SIGN IN
+                </Link>
+              )}
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
@@ -104,7 +103,7 @@ export default function ClippedDrawer() {
             <ListItem
               button
               key="Compose"
-              onClick={() => setComposeComponent(!composeComponent)}
+              onClick={(event) => console.log(event)}
             >
               <ListItemIcon>
                 <AddCircleIcon />
@@ -130,7 +129,11 @@ export default function ClippedDrawer() {
             <ListItem
               button
               key="LOGOUT"
-              onClick={(event) => console.log(event)}
+              onClick={() => {
+                if (currentUser) {
+                  auth.signOut();
+                }
+              }}
             >
               <ListItemIcon>
                 <ExitToAppIcon />
