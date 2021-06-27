@@ -1,9 +1,8 @@
 import React from 'react';
-import Header from './components/head/header.component';
-import Drawer from './components/drawer/drawer.component';
-// import HomePage from './Pages/homepage/homepage';
+import Homepage from './Pages/homepage/homepage';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Compose from './Pages/compose/Compose';
+import Editor from './components/editor/editor.component';
 import SignInAndSignUpPage from './Pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 class App extends React.Component {
@@ -43,9 +42,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header currentUser={this.state.currentUser} />
         <Switch>
-          <Route exact path="/" component={Drawer} />
+          <Route
+            exact
+            path="/"
+            component={() => <Homepage currentUser={this.state.currentUser} />}
+          />
           <Route
             exact
             path="/signin"
@@ -57,6 +59,7 @@ class App extends React.Component {
               )
             }
           />
+          <Route exact path="/editor" component={Editor} />
           <Route exact path="/c" component={Compose} />
         </Switch>
       </div>

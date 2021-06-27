@@ -57,7 +57,7 @@ export default function ClippedDrawer({ currentUser }) {
   const [sentComponent, setSentComponent] = useState(false);
 
   const name = 'Ayush';
-  const greeting = `Hello ${name}`;
+  const greeting = `Hello ${currentUser ? currentUser.displayName : null}`;
 
   return (
     <div className={classes.root}>
@@ -79,67 +79,65 @@ export default function ClippedDrawer({ currentUser }) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem
-              button
-              key={greeting}
-              onClick={(event) => console.log(event.target)}
-            >
-              {currentUser ? (
-                <div className="option" onClick={() => auth.signOut()}>
-                  SIGN OUT
-                </div>
-              ) : (
-                <Link className="option" to="/signin">
-                  SIGN IN
-                </Link>
-              )}
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary={greeting} />
-            </ListItem>
+            {currentUser ? (
+              <ListItem button key={greeting}>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText primary={greeting} />
+              </ListItem>
+            ) : (
+              <Link className="option" to="/signin">
+                <ListItem button key="SIGN IN">
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SIGN IN" />
+                </ListItem>
+              </Link>
+            )}
           </List>
           <List>
-            <ListItem
-              button
-              key="Compose"
-              onClick={(event) => console.log(event)}
-            >
-              <ListItemIcon>
-                <AddCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Compose" />
-            </ListItem>
-            <ListItem
-              button
-              key="Schedule Mail"
-              onClick={(event) => console.log(event)}
-            >
-              <ListItemIcon>
-                <ScheduleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Schedule Mail" />
-            </ListItem>
-            <ListItem button key="SENT" onClick={(event) => console.log(event)}>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="SENT" />
-            </ListItem>
-            <ListItem
-              button
-              key="LOGOUT"
-              onClick={() => {
-                if (currentUser) {
-                  auth.signOut();
-                }
-              }}
-            >
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="LOGOUT" />
-            </ListItem>
+            {currentUser ? (
+              <div>
+                <Link to="/c">
+                  <ListItem button key="Compose">
+                    <ListItemIcon>
+                      <AddCircleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Compose" />
+                  </ListItem>
+                </Link>
+                <ListItem
+                  button
+                  key="Schedule Mail"
+                  onClick={(event) => console.log(event)}
+                >
+                  <ListItemIcon>
+                    <ScheduleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Schedule Mail" />
+                </ListItem>
+                <ListItem
+                  button
+                  key="SENT"
+                  onClick={(event) => console.log(event)}
+                >
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SENT" />
+                </ListItem>
+                <div onClick={() => auth.signOut()}>
+                  <ListItem button key="LOGOUT">
+                    <ListItemIcon>
+                      <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="LOGOUT" />
+                  </ListItem>
+                </div>
+              </div>
+            ) : null}
           </List>
           <Divider />
         </div>

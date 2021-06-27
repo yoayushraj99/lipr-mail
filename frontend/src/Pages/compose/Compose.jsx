@@ -7,10 +7,6 @@ import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
-// import _ from 'lodash';
-import 'flatpickr/dist/themes/material_green.css';
-
-import Flatpickr from 'react-flatpickr';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -29,13 +25,12 @@ const useStyles = makeStyles(() => ({
 
 const Compose = (props) => {
   const classes = useStyles();
-  const [date, setDate] = useState(new Date());
   const initialValue = {
     to: '',
     cc: '',
     subject: '',
     body: '',
-    scheduleDate: date,
+    scheduleDate: new Date(),
     frequency: 30,
   };
   const [mail, setMail] = useState(initialValue);
@@ -46,11 +41,6 @@ const Compose = (props) => {
       ...mail,
       [name]: value,
     });
-  };
-
-  const handleChangeDate = (event) => {
-    const value = event.target.value;
-    setDate(value);
   };
 
   const onSubmit = (e) => {
@@ -124,13 +114,6 @@ const Compose = (props) => {
                 <Grid container justify="space-between">
                   <Grid container>
                     <Grid item>
-                      <input
-                        type="datetime-local"
-                        name="date"
-                        onChange={handleChangeDate}
-                      />
-                    </Grid>
-                    <Grid item>
                       <InputLabel htmlFor="age-native-simple">
                         frequency
                       </InputLabel>
@@ -143,9 +126,10 @@ const Compose = (props) => {
                           id: 'age-native-simple',
                         }}
                       >
-                        <option value={30}>Thirty Seconds</option>
-                        <option value="month">Monthly</option>
-                        <option value="year">Yearly</option>
+                        <option value={0}>Thirty Seconds</option>
+                        <option value={1}>Weekly</option>
+                        <option value={2}>Monthly</option>
+                        <option value={3}>Yearly</option>
                       </Select>
                     </Grid>
                   </Grid>

@@ -4,11 +4,14 @@ var cors = require('cors');
 
 // routes
 const mails = require('./routes/api/mails');
+const SendMail = require('./controller/sendMail');
 
 const app = express();
 
 // Connect Database
 connectDB();
+
+SendMail();
 
 app.use(cors({ origin: true, credentials: true }));
 
