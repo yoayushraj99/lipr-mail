@@ -1,1 +1,1 @@
-# flipr-mail
+# lipr-mail
